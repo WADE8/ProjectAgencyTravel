@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\busController;
+use App\Http\Controllers\clientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/travelAgency', function () {
+    return view('Layouts.defaultDash');
 });
+
+Route::prefix('travelAgency')->group(function(){
+    Route::resource('/bus',busController::class);
+    Route::resource('/client',clientController::class);
+    Route::resource('/voyage',voyageController::class);
+});
+
