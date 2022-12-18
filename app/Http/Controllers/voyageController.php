@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\voyageStoreRequest;
+use App\Models\bus;
 use App\Models\voyage;
 use Illuminate\Http\Request;
+use App\Http\Requests\voyageStoreRequest;
 
 class voyageController extends Controller
 {
@@ -15,7 +16,7 @@ class voyageController extends Controller
      */
     public function index()
     {
-        $voyages = voyage::all();
+        $voyages = voyage::with('bus')->get();
         return view('Voyage.index',compact('voyages'));
     }
 
@@ -26,7 +27,9 @@ class voyageController extends Controller
      */
     public function create()
     {
-        return view('Voyage.create');
+
+        $buses = bus::all();
+        return view('Voyage.create',compact('buses'));
     }
 
     /**
@@ -38,9 +41,10 @@ class voyageController extends Controller
     public function store(voyageStoreRequest $request)
     {
         voyage::create([
-            'Itineraire'=>$request->Itineraire,
+            'Destination'=>$request->Destination,
             'Montant'=>$request->Montant,
-            'Date_Heure'=>$request->Date_Heure
+            'Date_Heure'=>$request->Date_Heure,
+            'bus_id'=>$request->bus_id
         ]);
 
         return to_route('voyage.index');
@@ -78,15 +82,17 @@ class voyageController extends Controller
     public function update(voyageStoreRequest $request, voyage $voyage)
     {
         $request->validate([
-            'Itineraire'=>'required',
+            'Destination'=>'required',
             'Montant'=>'required',
-            'Date_Heure'=>'required'
+            'Date_Heure'=>'required',
+            'bus_id'=>'required'
         ]);
 
         $voyage->update([
-            'Itineraire'=>$request->Itineraire,
+            'Destination'=>$request->Destination,
             'Montant'=>$request->Montant,
             'Date_Heure'=>$request->Date_Heure,
+            'bus_id'=>$request->bus_id
         ]);
         return to_route('voyage.index');
 

@@ -17,7 +17,7 @@ class busController extends Controller
     public function index()
     {
         $buses = bus::all();
-        return view('Bus.index',compact('buses'));
+        return view('Bus.index', compact('buses'));
     }
 
     /**
@@ -38,14 +38,13 @@ class busController extends Controller
      */
     public function store(Request $request)
     {
-        $id = IdGenerator::generate(['table'=>'bus' , 'length'=> 7 ,'field'=>'Matricule', 'prefix'=>'BUS-' ]);
+        $id = IdGenerator::generate(['table' => 'bus', 'length' => 7, 'field' => 'Matricule', 'prefix' => 'BUS-']);
         $bus = new bus();
         $bus->Matricule = $id;
         $bus->Nbre_places = $request->Nbre_places;
         $bus->save();
 
         return to_route('bus.index');
-
     }
 
     /**
@@ -69,7 +68,7 @@ class busController extends Controller
     {
 
         $bus = bus::findOrFail($id);
-        return view('Bus.edit',compact('bus'));
+        return view('Bus.edit', compact('bus'));
     }
 
     /**
@@ -83,7 +82,7 @@ class busController extends Controller
     {
 
         $request->validate([
-            'Nbre_places'=>'required'
+            'Nbre_places' => 'required'
         ]);
 
         $bus = bus::findOrFail($id);
@@ -93,7 +92,6 @@ class busController extends Controller
 
 
         return to_route('bus.index');
-
     }
 
     /**

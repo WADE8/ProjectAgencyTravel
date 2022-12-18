@@ -13,8 +13,9 @@
                         <thead>
                             <tr>
                                 <th scope='col'>#</th>
-                                <th scope='col'>Itineraire</th>
+                                <th scope='col'>Destination</th>
                                 <th scope='col'>Date et Heure</th>
+                                <th scope='col'>Numero de bus</th>
                                 <th scope='col'>Montant</th>
                                 <th scope='col'>Action</th>
 
@@ -24,8 +25,9 @@
                             @foreach ($voyages as $voyage)
                                 <tr>
                                     <th>{{ $loop->index + 1}}</th>
-                                    <td>{{ $voyage->Itineraire }}</td>
+                                    <td>{{ $voyage->Destination }}</td>
                                     <td>{{ $voyage->Date_Heure }}</td>
+                                    <td>{{isset($voyage->bus->Matricule)?$voyage->bus->Matricule:""}}</td>
                                     <td>{{ $voyage->Montant }}</td>
 
                                     <td>

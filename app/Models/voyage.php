@@ -16,6 +16,6 @@ class voyage extends Model
     }
     public function bus ()
     {
-        $this->hasMany(bus::class,'bus_id');
+        return $this->belongsTo(bus::class,'bus_id','id');
     }
 }

@@ -26,10 +26,10 @@
                                                     <div class="form-group row">
 
 
-                                                        <label class="col-md-3 label-control" for="projectinput1">  Itineraire : </label>
+                                                        <label class="col-md-3 label-control" for="projectinput1">  Destination : </label>
                                                         <div class="col-md-9">
                                                             <input type="text" id="projectinput1" class="form-control"
-                                                                name="Itineraire">
+                                                                name="Destination">
                                                         </div>
 
                                                     </div>
@@ -39,6 +39,20 @@
                                                             <input type="datetime-local" id="projectinput2" class="form-control"
                                                             name="Date_Heure">
                                                         </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control"
+                                                            for="projectinput4">Numero de bus: </label>
+                                                            <div class="col-md-9">
+                                                                <select class="form-control form-select" aria-label="Default select example" name="bus_id">
+                                                                    @foreach ($buses as $bus )
+                                                                    <option value="{{ $bus->id }}">{{ $bus->Matricule }} ({{ $bus->Nbre_places }} places)</option>
+                                                                    @endforeach
+
+                                                                  </select>
+                                                            </div>
                                                     </div>
 
                                                     <div class="form-group row">
